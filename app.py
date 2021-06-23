@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 import requests
-import pyautogui
+
 
 
 def main():
