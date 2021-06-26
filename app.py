@@ -1,11 +1,8 @@
-import streamlit as st
-import codecs
-import streamlit.components.v1 as stc
 
-def my_html(html_file,width=700,height=500):
-	html_file=codecs.open(html_file,'r')
-	page=html_file.read()
-	stc.html(page,width=width,height=height,scrolling=False)
+import streamlit as st 
 
-
-my_html('map.html')
+import requests
+r=requests.get('http://get.geojs.io/v1/ip.json')
+ipadd=r.json()['ip']
+print(ipadd)
+st.write(ipadd)
