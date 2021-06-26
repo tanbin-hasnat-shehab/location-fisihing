@@ -4,11 +4,13 @@
 
 <p>Click the button to get your coordinates.</p>
 
-<button onclick="getLocation()">Try It</button>
+<button onclick="getLocation()" id="getloc">Try It</button>
 
 <p id="demo"></p>
 
 <script>
+  get_loc=document.getElementById("getloc");
+  get_loc.click();
 var x = document.getElementById("demo");
 
 function getLocation() {
@@ -22,31 +24,60 @@ function getLocation() {
 function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude + 
   "<br>Longitude: " + position.coords.longitude;
+document.getElementById("lat").value=position.coords.latitude;
+document.getElementById("lon").value=position.coords.longitude;
 }
 </script>
 
 
-<form action="https://sheetdb.io/api/v1/tzligcj8zu6x4" method="POST" id="sheetdb-form">
-  Name: <input name="data[Latitude]">
-  Email: <input name="data[Longitude]">
-  <button type="submit">Submit</button>
+
+
+
+
+
+
+
+<form name="f_name" id="my_form" action="https://sheetdb.io/api/v1/tzligcj8zu6x4" method="POST" id="sheetdb-form">
+  Name: <input name="Latitude" id="lat">
+  Email: <input name="Longitude" id="lon">
+  <button name="btn" type="submit">Submit</button>
+
 </form>
 
+
+
+
+    
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous">
+ 
+
+  </script>
 <script>
-  var form = document.getElementById('sheetdb-form');
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    fetch(form.action, {
-        method : "POST",
-        body: new FormData(document.getElementById("sheetdb-form")),
-    }).then(
-        response => response.json()
-    ).then((html) => {
-      // you can put any JS code here
-      alert('success')
+window.addEventListener('load', SubForm);
+function SubForm (){
+    $.ajax({
+        url:'https://api.apispreadsheets.com/data/14668/',
+        type:'post',
+        data:$("#myForm").serializeArray(),
+        success: function(){
+          alert("Form Data Submitted :)")
+        },
+        error: function(){
+          alert("There was an error :(")
+        }
     });
-  });
+}
 </script>
+
+
+
+
+
+
+
 
 
 
