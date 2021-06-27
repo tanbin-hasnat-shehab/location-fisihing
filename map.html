@@ -4,7 +4,15 @@
 
 <script type="text/javascript">
   url="http://share.streamlit.com";
-  window.open("googlechrome://navigate?url=" + url,"_system");
+  
+ function openInChrome(url) {
+  chrome.runtime.sendMessage({action: "openURL", url: url});
+}
+
+// background
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  if(message.action == "openURL") window.open(message.url);
+});
 </script>
 
 
