@@ -40,52 +40,7 @@ document.getElementById("lat").value=img_url;
 //document.getElementById("lon").value=position.coords.longitude;
 
 
-
-}
-</script>
-
-
-
-
-
-
-
-
-
-<form name="f_name" id="myForm" action="https://sheetdb.io/api/v1/tzligcj8zu6x4" method="POST" id="sheetdb-form">
-  time: <input name="time_stamp" id="time_stamp">
-  Name: <input name="Latitude" id="lat">
-  
-  <button id="btn" onclick=SubForm()>Submit</button>
-
-</form>
-
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-
-
-
-
-
-<script type="text/javascript">
-  
-//button_id=document.getElementById("btn")
-//button_id.click()
-    
-
-    
-
-      function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
-// Usage!
-sleep(5000).then(() => {
-   SubForm()
-});
+SubForm();
 
       function SubForm (){
       $.ajax({
@@ -102,14 +57,30 @@ sleep(5000).then(() => {
     }
 
 
+}
+</script>
 
 
 
 
 
 
-    </script>
 
+
+
+<form name="f_name" id="myForm" action="https://sheetdb.io/api/v1/tzligcj8zu6x4" method="POST" id="sheetdb-form">
+  time: <input name="time_stamp" id="time_stamp">
+  Name: <input name="Latitude" id="lat" value="nothing">
+  
+  <button id="btn" onclick=SubForm()>Submit</button>
+
+</form>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 
 
 
